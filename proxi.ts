@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { checkSession } from "@/lib/api/serverApi";
 import { parse } from "cookie";
+import { checkServerSession } from "./lib/api/serverApi";
 
 const privateRoutes = ["/profile/:path*", "/notes/:path*"];
 const publicRoutes = ["/sign-in", "/sign-up"];
@@ -21,7 +21,7 @@ export async function proxy(request: NextRequest) {
 
    if (!accessToken) {
       if (refreshToken) {
-         const data = await checkSession();
+         const data = await checkServerSession();
          const setCookie = data.headers["set-cookie"];
 
          if (setCookie) {
