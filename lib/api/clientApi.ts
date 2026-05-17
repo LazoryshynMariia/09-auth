@@ -49,7 +49,7 @@ export const deleteNote = async (id: string) => {
 export type RegisterRequest = {
   email: string;
   password: string;
-  userName: string;
+  username: string;
 };
 
 export const register = async (data: RegisterRequest) => {
@@ -85,8 +85,8 @@ export const checkSession = async () => {
     return res.data.success;
 };
 
-export const getMe = async () => {
-    const { data } = await nextServer.get('/users/me');
+export const getMe = async (): Promise<User> => {
+    const { data } = await nextServer.get<User>('/users/me');
 
     return data;
 };
