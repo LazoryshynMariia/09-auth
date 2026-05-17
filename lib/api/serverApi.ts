@@ -35,15 +35,15 @@ export const fetchNoteById = async (id: string) => {
     
     return res.data;
 };
-
-export type CheckSessionRequest = {
-    success: boolean;
-};
  
-export const checkSession = async () => {
-    const res = await nextServer<CheckSessionRequest>('/auth/session');
-
-    return res.data.success;
+export const checkServerSession = async () => {
+    const cookieStore = await cookies();
+  const res = await nextServer.get('/auth/session', {
+    headers: {
+      Cookie: cookieStore.toString(),
+    },
+  });
+  return res;
 };
 
 export const getMe = async () => {
