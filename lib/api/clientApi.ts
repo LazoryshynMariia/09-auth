@@ -1,6 +1,5 @@
 import { Note } from "@/types/note";
 import { nextServer } from "./api";
-import { NotesResponse } from "./serverApi";
 import { User } from "@/types/user";
 
 // updateMe
@@ -10,6 +9,12 @@ export interface NewNote {
   content: string,
   tag: string,
 };
+
+export interface NotesResponse { 
+    notes: Note[];
+    totalPages: number;
+};
+
 
 
 export const getNotes = async (searchText?: string, page: number = 1, tag?: string ) => {
